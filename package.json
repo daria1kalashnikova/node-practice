@@ -19,6 +19,7 @@
   "homepage": "https://github.com/daria1kalashnikova/node-practice#readme",
   "description": "",
   "dependencies": {
+    "commander": "^13.1.0",
     "nanoid": "^5.1.5"
   }
 }
