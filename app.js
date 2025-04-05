@@ -1,5 +1,6 @@
 import express, { json } from "express";
 import cors from "cors";
+import morgan from "morgan";
 import productsRouter from "./routes/api/productsRouter.js";
 import { connectToDB } from "./db/Sequelize.js";
 
