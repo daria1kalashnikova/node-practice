@@ -10,8 +10,26 @@ export const createProduct = async (req, res, next) => {
 };
 export const getProducts = async (req, res, next) => {
   try {
-    const { page, limit } = req.query;
-    const products = await service.getProducts({ page, limit });
+    const {
+      page = 1,
+      limit = 10,
+      search,
+      priceMin,
+      priceMax,
+      nameSort,
+      priceSort,
+      discountSort,
+    } = req.query;
+    const products = await service.getProducts({
+      page,
+      limit,
+      search,
+      priceMin,
+      priceMax,
+      nameSort,
+      priceSort,
+      discountSort,
+    });
     res.json({ products, page: Number(page), limit: Number(limit) });
   } catch (error) {
     next(error);
