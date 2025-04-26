@@ -24,6 +24,6 @@ const Product = sequelize.define(
   }
 );
 
-await Product.sync({ alter: true });
+// await Product.sync({ alter: true });
 
 export default Product;

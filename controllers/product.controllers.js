@@ -1,3 +1,5 @@
+import fs from "node:fs/promises";
+import createError from "http-errors";
 import * as service from "../services/product.services.js";
 
 export const createProduct = async (req, res, next) => {
@@ -34,4 +36,16 @@ export const getProducts = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+};
+
+export const updateProduct = (req, res, next) => {
+  if (!req.file) {
+    throw createError(400, "File is requered");
+  }
+
+  fs.rename(oldPath, newPath);
+  req.file;
+
+  //   console.log("ok");
+  res.json("ok");
 };
