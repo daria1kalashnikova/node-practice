@@ -1,4 +1,5 @@
 import fs from "node:fs/promises";
+import path from "node:path";
 import createError from "http-errors";
 import * as service from "../services/product.services.js";
 
@@ -38,14 +39,20 @@ export const getProducts = async (req, res, next) => {
   }
 };
 
-export const updateProduct = (req, res, next) => {
+export const updateProduct = async (req, res, next) => {
   if (!req.file) {
     throw createError(400, "File is requered");
   }
 
-  fs.rename(oldPath, newPath);
-  req.file;
+  const oldPath = req.file.path;
+  const newPath = path.resolve("public", "products", req.file.filename);
+  await fs.rename(oldPath, newPath);
 
+  const productUrlPath = "/products/" + req.file.filename;
+  await service.updateProduct(req.params.id, {
+    productImage: productUrlPath,
+  });
   //   console.log("ok");
-  res.json("ok");
+  // res.json("ok");
+  res.json({ message: "Successfully", productImage: productUrlPath });
 };

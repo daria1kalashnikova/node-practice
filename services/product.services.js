@@ -1,5 +1,6 @@
 import { Op } from "sequelize";
 import Product from "../db/models/product.js";
+import createError from "http-errors";
 
 export const createProduct = async (product) => {
   return Product.create(product);
@@ -47,4 +48,13 @@ export const getProducts = async ({
     }),
   });
   return products;
+};
+
+export const updateProduct = async (productId, productData) => {
+  const product = await Product.findByPk(productId);
+  if (!product) {
+    throw createError(404, "Product not found");
+  }
+  console.log(await product.update(productData));
+  return product.update(productData);
 };

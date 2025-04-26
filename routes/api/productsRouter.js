@@ -8,6 +8,10 @@ productsRouter.post("/", controllers.createProduct);
 
 productsRouter.get("/", controllers.getProducts);
 
-productsRouter.patch("/", upload.single("product"));
+productsRouter.patch(
+  "/:id",
+  upload.single("product"),
+  controllers.updateProduct
+);
 
 export default productsRouter;
